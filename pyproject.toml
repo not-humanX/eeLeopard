@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "eeleopard"
+dynamic = ["version"]            # single source of truth: eeleopard/__init__.py
+description = "FFT-based erasure-and-error decoding of Reed-Solomon codes (Han, Chen, Lin, Bai, IJAHUC 2021) on the Lin-Chung-Han novel polynomial basis"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = ["numpy>=1.22"]
+
+[project.optional-dependencies]
+numba = ["numba"]
+test = ["pytest"]
+
+[tool.setuptools]
+packages = ["eeleopard"]
+
+[tool.setuptools.dynamic]
+version = {attr = "eeleopard.__version__"}
+
+[tool.setuptools.package-data]
+eeleopard = ["py.typed"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
