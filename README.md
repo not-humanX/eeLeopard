@@ -4,6 +4,16 @@ A complete Python/numpy implementation of
 
 > Y. S. Han, C. Chen, S.-J. Lin, B. Bai, **"On fast Fourier transform-based decoding of Reed-Solomon codes"**, *Int. J. Ad Hoc and Ubiquitous Computing* (2021).
 
+# A Note From a Human
+
+This library was written by an LLM. I've looked though the code but haven't vetted it in detail. It appears and tests correct but use at your own risk. Open an issue if you find a problem. PRs are also welcome.
+
+This library only exists because I needed an implementation and could not find one.  If you know of another implementation, especially if it's faster, more mature, or written by humans, let me know by opening an issue and I'll list it in this readme.
+
+The LLM has also added commentary about the paper this is based on. These are not my opinions and I think it's likely there's conventions/subtext/assumptions that the LLM didn't pick up on when it's mentioning "mistakes" it found.
+
+# Overview
+
 The implementation covers the Lin–Chung–Han novel polynomial basis and its $O(n \log n)$ additive FFT over $\mathrm{GF}(2^m)$ (Algorithm 1), the $O(n \log(n-k))$ systematic encoder of eq. (8), and the paper's contribution: the **erasure-and-error decoder** of Section 4. It corrects any $v$ errors and $f$ erasures with $2v + f \le n-k$ in $O\big(n \log n + (n-k)\log^2(n-k)\big)$.
 
 Every step is checked against brute-force definitions and against an independent textbook decoder (291 tests). Implementing it exposed a slip in the paper: in two places it silently assumes $f_t'(x) = 1$. As printed, the decoder is then only correct for special bases. Both places are corrected here; see below.
